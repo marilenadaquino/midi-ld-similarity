@@ -13,4 +13,4 @@ java -jar melodyshape-1.4.jar -q data/$1 -c data/ -a 2015-shapeh -k 10 | paste -
 python midi_similarity.py $1 > match.nt
 
 # curl send the .nt file to MIDI LOD Cloud
-curl -s -o /dev/null -X POST -H'Content-Type: application/sparql-update' -d"INSERT DATA { GRAPH <http://virtuoso-midi.amp.ops.labs.vu.nl/none> { $(cat match.nt) } }" $2
+curl -s  -o /dev/null -X POST http://grlc.io/api/midi-ld/queries/insert_pattern -d"g=<$2>" -d"data=$(cat match.nt)"
